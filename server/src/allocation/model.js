@@ -1,13 +1,7 @@
 import { delay } from 'lodash'
 
 //Allocation calculator
-/*
-  Notes:
-  
-*/
-
-
-class Investor {
+export class Investor {
     constructor(inv) {
         this.requested_amount = inv.requested_amount
         this.average_amount = inv.average_amount
