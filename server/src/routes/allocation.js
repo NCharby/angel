@@ -1,7 +1,18 @@
-import { router } from 'express'
+import Express from 'express'
+import Allocation from '../allocation/index'
 
-router.get('/', function(req, res, next) {
-  res.send('respond with an allocation');
+//Router Obj
+const router = Express.Router()
+
+router.post('/', async function(req, res, next) {
+  const Allo = new Allocation()
+  //TODO: Schema validation
+
+  const calculated = await Allo.getAllocations(req.body)
+  
+  res.send(calculated);
 });
+
+
 
 export default router
