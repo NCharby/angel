@@ -32,6 +32,7 @@ function App() {
             'allocation_amount': alloAmount,
             'investor_amounts': cleanState
         })
+        setResultsState(r.data)
         setRequesting(false) //ok, you can post again
     }, [isRequesting, alloAmount, formState])
 
@@ -47,7 +48,8 @@ function App() {
                         setFormState={setFormState}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <Results />
+                    <Results 
+                        resultsState={resultsState}/>
                 </Grid>
             </Grid>
         </Container>
