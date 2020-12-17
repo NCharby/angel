@@ -1,4 +1,6 @@
 import React, { useState, useCallback } from 'react'
+import axios from 'axios'
+
 
 import {
     Container,
@@ -14,14 +16,20 @@ function App() {
     const [ isRequesting, setRequesting ] = useState(false)
     //this is gross. use a state manager for data
     const [ formState, setFormState ] = useState([{},{},{}])
+    const [ resultsState, setResultsState ] = useState({})
     const [ alloAmount, setAlloAmount ] = useState(0)
-
+    
     const sendRequest = useCallback( async () => {
         if(isRequesting) return
-        setRequesting(true)
-        console.log('REQUEST')
-
-        setRequesting(false)
+        const locState = [...formState] //being safe
+        //90% sure [].filter returns a new array, but I'm not here to get clever
+        const cleanState = locState.filter(value => Object.keys(value).length !== 0)
+        if(!cleanState.length) return //bail if empty
+        setRequesting(true) //prevent double sends
+        //TODO: make an api wrapper
+        const r = await axios.post('http://localhost:3001/api/allo', cleanState)
+        console.log(r)
+        setRequesting(false) //ok, you can post again
     }, [isRequesting])
 
     return (

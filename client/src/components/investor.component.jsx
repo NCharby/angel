@@ -8,6 +8,8 @@ import {
     MoneyInput
 } from './index.js'
 
+//I promise, I can write proper css.
+// That's not what makes this challenge interesting tho
 const useStyles = makeStyles((theme) => ({
     wrapper: {
         display: 'flex',
@@ -36,6 +38,8 @@ export default function InvestorComponent(props) {
         return formState[idPrefix][type] || ""
     }
 
+    //TODO: validate 
+    //yup, it'll all break if you don't complete the line.
     return (
         <div className={classes.wrapper}>
             <TextField
