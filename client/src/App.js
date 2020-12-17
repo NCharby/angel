@@ -20,6 +20,7 @@ function App() {
     const [ alloAmount, setAlloAmount ] = useState(0)
     
     const sendRequest = useCallback( async () => {
+        console.log(alloAmount)
         if(isRequesting) return
         const locState = [...formState] //being safe
         //90% sure [].filter returns a new array, but I'm not here to get clever
@@ -27,10 +28,12 @@ function App() {
         if(!cleanState.length) return //bail if empty
         setRequesting(true) //prevent double sends
         //TODO: make an api wrapper
-        const r = await axios.post('http://localhost:3001/api/allo', cleanState)
-        console.log(r)
+        const r = await axios.post('http://localhost:3001/api/allo', {
+            'allocation_amount': alloAmount,
+            'investor_amounts': cleanState
+        })
         setRequesting(false) //ok, you can post again
-    }, [isRequesting])
+    }, [isRequesting, alloAmount, formState])
 
     return (
         <Container className="App" maxWidth="md">

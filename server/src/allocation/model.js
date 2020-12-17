@@ -47,7 +47,7 @@ export default class Calculator {
         await delay( () => {
             console.log('fake CREATE the investor records')
         }, 1)
-        
+        console.log("investors", investors)
         investors.forEach(inv => {
             this.iList.push(new Investor(inv))
         });
