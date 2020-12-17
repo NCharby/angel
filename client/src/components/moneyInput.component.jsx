@@ -11,6 +11,7 @@ export default function MoneyInputComponent(props) {
     return (
         <TextField
             {...props}
+            type="number"
             InputProps={{
                 startAdornment: (
                     <InputAdornment position="start">
