@@ -10,7 +10,7 @@ export default class Controller {
         const Investors = await this.model.getAllocations(investor_amounts, allocation_amount)
 
         return Investors.reduce((acc, Inv) => {
-            return {...acc , [Inv.name]: Inv.getRealInvestment(allocation_amount)}
+            return {...acc , [Inv.name]: Inv.allocated}
         }, {})
 
     }

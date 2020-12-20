@@ -3,36 +3,26 @@ import { delay } from 'lodash'
 //Allocation calculator
 export class Investor {
     constructor(inv) {
-        this.requested_amount = inv.requested_amount
-        this.average_amount = inv.average_amount
+        this.requested_amount = Number(inv.requested_amount)
+        this.average_amount = Number(inv.average_amount)
         this.name = inv.name
-        this.proportion = 0 //float
+        this.proportion = 0
+        this.allocated = 0
     }
 
-    async setProportion(totalDesired){
-        //TODO
-        //BUG
-        // You're getting values over the desired amount right here
-        // 1 / 97 = 0.0103 which is > 1 when getRealInvestment is calc'd
-        //Come back to this if you have time
-        this.proportion = this.getMax() / totalDesired 
-        console.log('proportion', this.proportion, this.getMax(), totalDesired)
-        //save to db
-        await delay( () => {
-            console.log('fake UPDATE Investor proportions')
-        }, 1)
+    setAllocated(amount){
+        this.allocated = amount
+        return this.allocated
+    }
+
+    setProportion(amount){
+        this.proportion = amount
         return this.proportion
     }
 
     getMax() {
         if(this.requested_amount <= this.average_amount) return this.requested_amount
         return this.average_amount
-    }
-
-    getRealInvestment(maxAllocation) {
-        const money = maxAllocation * this.proportion
-        // return Math.ceil(money * 100) / 100; //round to cent
-        return money
     }
 }
 
@@ -45,9 +35,10 @@ export default class Calculator {
     async buildInvestorList(investors) {
         //save to db
         await delay( () => {
+            // create records, grab other stuff, create audit trail
             console.log('fake CREATE the investor records')
         }, 1)
-        console.log("investors", investors)
+        
         investors.forEach(inv => {
             this.iList.push(new Investor(inv))
         });
@@ -61,17 +52,50 @@ export default class Calculator {
         }, 0)
     }
 
+    async calcProportions(Investors, available, desired){
+        Investors.forEach( Inv => {
+            const p = Math.abs(Inv.allocated - Inv.requested_amount) / desired
+            const newAllo = Inv.allocated + (p * available)
+            Inv.setProportion(p)
+            Inv.setAllocated(newAllo)
+        })
+        //save to db
+        await delay( () => {
+            // add to the audit trail, set the amounts
+            console.log('fake UPDATE the investor records')
+        }, 1)
+        
+        return Investors
+    }
+
     async getAllocations(investors, maxAllocation) {
         //build the investors
         const Investors =  await this.buildInvestorList(investors)
-        //what's the amount everyone wants together?
-        const TOTAL_DESIRED = this.getTotalDesired(Investors)
-        //calc each proportion
-        await Promise.all(Investors.map(Inv => {
-            Inv.setProportion(TOTAL_DESIRED)
-        }))
         
-        return Investors
+        //what's the total amonut they want to invest?
+        const totalDesired = this.getTotalDesired(Investors)
+        
+        //everyone's historical max fits!, how do we divi up the rest?
+        if(totalDesired < maxAllocation){
+            //everyone get's their historical max, what's left with their desired?
+            const remainder = maxAllocation - totalDesired
+            let allAvailable = 0
+            Investors.forEach(Inv => {
+                //yup, you at least get your historical max
+                Inv.setAllocated(Inv.getMax())
+                if(Inv.requested_amount > Inv.allocated){
+                    //want to give more? Let's build a propotion from that
+                    const nextAvailable = Inv.requested_amount - Inv.allocated
+                    allAvailable += nextAvailable
+                }
+            })
+            //Negociate the remainder
+            return await this.calcProportions(Investors, remainder, allAvailable)
+        } else {
+            //There's more historical max than the limit.
+            //Negociate all totals per proportion
+            return await this.calcProportions(Investors, maxAllocation, totalDesired)
+        }
 
     }
 }

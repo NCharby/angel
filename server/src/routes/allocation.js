@@ -8,7 +8,6 @@ router.post('/', async function(req, res, next) {
   const Allo = new Allocation()
   //TODO: Schema validation
   try {
-    console.log(req.body)
     const calculated = await Allo.getAllocations(req.body) 
     res.send(calculated)
   } catch (error) {

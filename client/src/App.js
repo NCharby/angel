@@ -20,7 +20,6 @@ function App() {
     const [ alloAmount, setAlloAmount ] = useState(0)
     
     const sendRequest = useCallback( async () => {
-        console.log(alloAmount)
         if(isRequesting) return
         const locState = [...formState] //being safe
         //90% sure [].filter returns a new array, but I'm not here to get clever
