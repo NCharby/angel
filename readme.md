@@ -63,7 +63,7 @@ The math for this is not what is expected, but it's close. The logic goes someth
 
 #### IF THE HISTORICAL AVERAGE 'FITS' WITHIN THE TOTAL ####
 
-- Give all investors the historical maximum they are allowed
+- Give all investors the historical maximum they are have requested
 - With the remainder:
     - Remaining `individual requested amount` by the remaining `total requested` for all investors with unallocated money
     - divi up the remaining `allocation limit` by that proportion
