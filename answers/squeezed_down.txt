@@ -1,0 +1,48 @@
+Prompt
+~~~~~~
+
+An angry investor sent us a note about how they keep getting squeezed down to $25K per deal even
+though their requested amount is $100K. Underneath the hood, this was because there's limited
+allocation (low supply) and a high volume of investors looking to invest (high demand). How should
+we communicate this to an investor in a way that minimizes the damage to our relationship with
+the investor?
+
+In addition, can you think of a better way we could change the proration basis logic so that
+this could potentially happen less often?
+
+Response
+~~~~~~~~
+
+Step 1: Empathy first. Call them!
+No, this wont scale. No, this wont likely fix the underlying pain. But this will give us better information on what a truly activated Customer wants. 
+
+This person has $100K to invest within our product, that's not something we can ignore. Embrace their value and listen. This call is important as it:
+
+- Instills trust in the Customer (We care)
+- Provides direct feeback on our current product (We're listeninng)
+- and Keeps the Customer active (We're engauged)
+
+
+Step 2: Expectation Setting
+We have failed to show this Customer why their investment cannot be the maximum amount they have requested. 
+
+Let's fix this going forward.
+
+- Perhaps we better message with videos on how allocations are calculated
+- Perhaps we change our process to include a human connection to explain the process
+- Perhaps we have a live calculator on the app that shows the real investment amount in relation to all other investments
+
+Let's knock together a test for each of these and see what sticks. And let's include this angery Investor if they're willing.
+
+
+Step 3: Learning and Adapting
+Depending on the feedback we get, we could go a few different ways with proration. Doing this based onn the historical average seems the most fair today, but we could explore:
+
+- Allowing the Startup to pick a model
+    - Historical Proration (default)
+    - First come, first served
+    - Hand Picked
+
+- A super premium option where verified (and paying) Investors could always get a higher propotion allocated
+
+- Pooling Investors across a portfolio of Startups

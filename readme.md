@@ -3,7 +3,7 @@
 Hey folks! This little project was fun and had some hidden challenges. 
 
 I've put together what I can in a few hours, I hope that's enough for now.
-
+*See `./answers` for the writen portion*
 
 ## Architecture ##
 

@@ -1,0 +1,46 @@
+Prompt
+~~~~~~
+
+Suppose we discover a bug with our algorithm and investors for two deals had incorrect
+allocations. This means that some of the investors ended up investing more than they were allowed to
+while others invested less than they were allowed to. One of deals happened two years ago and the
+other one happened two weeks ago. Please describe, in detail, how would you go about correcting this
+issue and how would you communicate this to the affected customers.
+
+Response
+~~~~~~~~
+
+Coming from FinTech, I know the importance of an Audit Trail. I mention this lightly in the project README and make allownaces in the code to provide it. Having this core to the initial MVP is essential to building trust with the customer and potentially avoiding getting in hot water legally as the product goes live.
+
+Now, we've discovered that we messed up. BUT because we have the evidence of how and when this mistake happened, we can get ourseleves out of it. My first corse of action would be to acknoledge the issue and insure the Customers that we are activly working on a solution.
+
+"""
+Hello Customer
+
+We have detected an internal issue with your investment made on [date] for [startup].
+
+We are currently investigating a discrepency in your allocated investment amount per the financial agreement and our TOS. Please set up a time with our Support Team to discuss the details.
+
+[calendar link]
+
+""
+
+As an engineer/lead/pm (whatever roll I take on), I cannot simply act on an issue like this alone. I would have a detailed investigation of the code and the audit trail prepared to take to managment and the legal team. Assuming a fix was in place, I would advocate 2 options;
+
+- Perfroming a new funding round with only the involved investors (High Risk, may impact the startup)
+or
+- Forcefully redistributing the allocations retroactivly per our written agreement with the Customer (Medium Risk, may alienate the Investors)
+
+
+With any course of action we decide, I lean towards empathy and active communication. Assuming we go with the simplest solution and redistribute per the written agreement:
+
+"""
+Hello Customer
+
+On [date], you trusted us with your investment in [startup].
+
+Unfortunatly, there was an error in the total allocation allotted to you. We will be redistributing your allocation per the written agreement signed on [date]. You will receive [refund/invoice] to your payment information on file. 
+
+The underlying issue has been fixed in out system going forward. If you have any questions, please contact [person]
+
+"""
